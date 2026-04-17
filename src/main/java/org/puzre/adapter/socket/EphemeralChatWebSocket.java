@@ -1,4 +1,4 @@
-package org.puzre.adapter.resource.socket;
+package org.puzre.adapter.socket;
 
 import io.quarkus.websockets.next.*;
 import jakarta.enterprise.context.ApplicationScoped;

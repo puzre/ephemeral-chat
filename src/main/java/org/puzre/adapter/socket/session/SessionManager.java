@@ -1,10 +1,11 @@
-package org.puzre.adapter.session;
+package org.puzre.adapter.socket.session;
 
 import io.quarkus.websockets.next.WebSocketConnection;
 import jakarta.inject.Singleton;
 import org.puzre.application.port.IMessageProvider;
 import org.puzre.application.port.ISessionManager;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -46,15 +47,16 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void broadcastUserMessage(String username, String message) {
+    public void broadcastUserMessage(String username, String message, WebSocketConnection senderConnection) {
         String chatMessage = iMessageProvider.getChatMessage(username, message);
-        this.sessions.forEach(session -> {
-            session.sendText(chatMessage)
-                    .subscribe()
-                    .with(
-                            success -> System.out.println("message sent to sessionId -> " + session.id()),
-                            failure -> System.out.println("failed to send message to sessionId ->" + session.id())
-                    );
-        });
+        this.sessions.stream().filter(it -> !Objects.equals(it.id(), senderConnection.id()))
+                .forEach(session -> {
+                    session.sendText(chatMessage)
+                            .subscribe()
+                            .with(
+                                    success -> System.out.println("message sent to sessionId -> " + session.id()),
+                                    failure -> System.out.println("failed to send message to sessionId ->" + session.id())
+                            );
+                });
     }
 }
