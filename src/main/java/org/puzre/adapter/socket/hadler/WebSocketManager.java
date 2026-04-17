@@ -3,14 +3,14 @@ package org.puzre.adapter.socket.hadler;
 import io.quarkus.websockets.next.WebSocketConnection;
 import jakarta.inject.Singleton;
 import org.puzre.application.port.ISessionManager;
-import org.puzre.application.port.IWebSocketHandler;
+import org.puzre.application.port.IWebSocketManager;
 
 @Singleton
-public class WebSocketHandler implements IWebSocketHandler {
+public class WebSocketManager implements IWebSocketManager {
 
     private final ISessionManager iSessionManager;
 
-    public WebSocketHandler(ISessionManager iSessionManager) {
+    public WebSocketManager(ISessionManager iSessionManager) {
         this.iSessionManager = iSessionManager;
     }
 

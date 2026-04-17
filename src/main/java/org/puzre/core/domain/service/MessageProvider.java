@@ -17,7 +17,7 @@ public class MessageProvider implements IMessageProvider {
     }
 
     @Override
-    public String getChatMessage(String message, String username) {
-        return String.format("<%s> %s", message, username);
+    public String getChatMessage(String username, String message) {
+        return String.format("<%s> %s", username, message);
     }
 }
