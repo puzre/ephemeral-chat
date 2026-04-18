@@ -1,0 +1,40 @@
+services:
+  tiramisu-chat-client:
+    networks:
+      - chat-network
+    image: chat-client-image
+    ports:
+      - "2222:22"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "250M"
+
+  oreo-chat-client:
+    networks:
+      - chat-network
+    image: chat-client-image
+    ports:
+      - "4444:22"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "250M"
+
+  chat-api:
+    networks:
+      - chat-network
+    image: chat-api-image
+    ports:
+      - ":8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "250M"
+
+networks:
+  chat-network:
+    driver: overlay

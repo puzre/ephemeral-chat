@@ -43,3 +43,7 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
+
+#SSH
+chat-client/ssh-keys/canary-ssh-key
+chat-client/ssh-keys/canary-ssh-key.pub
